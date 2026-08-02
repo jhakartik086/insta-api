@@ -1,0 +1,8 @@
+venv/
+users.db
+posts.db
+logs/
+*.pyc
+.env
+.vscode/
+__pycache__/

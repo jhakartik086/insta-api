@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>View Profile</title>
+
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='view_profile.css') }}"
+    />
+  </head>
+
+  <body>
+    <div id="navbar">
+      <div id="back-container">
+        <a href="javascript:history.back()">
+          <img src="{{ url_for('static', filename='icons/turn-back.png')}}" />
+        </a>
+      </div>
+    </div>
+
+    <div class="profile-container">
+      <div class="profile-image">
+        {% if profile and profile[1] %}
+        <img
+          src="{{ url_for('static', filename='profile_pics/' + profile[1]) }}"
+          id="profilePreview"
+          class="profile-pic"
+          alt="Profile Picture"
+        />
+        {% else %}
+        <img
+          src="{{ url_for('static', filename='default_profile.png') }}"
+          class="profile-pic"
+          alt="Default Profile Picture"
+        />
+        {% endif %}
+      </div>
+
+      <div class="profile-info">
+        <input type="text" id="username" value="{{ profile[2] }}" readonly />
+
+        <textarea id="bio" readonly>
+{{ profile[3] if profile else '' }}</textarea
+        >
+
+        <input type="text" id="gender" value="{{ profile[4] }}" readonly />
+      </div>
+    </div>
+  </body>
+</html>

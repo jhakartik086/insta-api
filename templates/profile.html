@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Profile</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='profile.css') }}"
+    />
+  </head>
+  <body>
+    <form id="profileForm" method="POST" enctype="multipart/form-data">
+      <div class="profile-container">
+        <label for="profileInput">
+          {% if profile and profile[1] %}
+          <img
+            src="{{ url_for('static', filename='profile_pics/' + profile[1]) }}"
+            id="profilePreview"
+            class="profile-pic"
+          />
+          {% else %}
+          <img
+            src="{{ url_for('static', filename='default.png') }}"
+            id="profilePreview"
+            class="profile-pic"
+          />
+          {% endif %}
+        </label>
+
+        <input
+          name="profile_pic"
+          type="file"
+          id="profileInput"
+          accept="image/*"
+        />
+      </div>
+
+      <input
+        type="text"
+        id="username"
+        value="{{ session['username'] }}"
+        name="username"
+        readonly
+      />
+      <input
+        type="text"
+        name="bio"
+        id="bio"
+        placeholder="Bio"
+        value="{{ profile[3] if profile else '' }}"
+      />
+      <select id="gender" name="gender">
+        <option value="male"
+        {% if profile and profile[4] == "male" %}
+        selected
+        {% endif %}>
+            Male
+        </option>
+
+        <option value="female"
+        {% if profile and profile[4] == "female" %}
+        selected
+        {% endif %}>
+          Female
+        </option>
+
+        <option value="other"
+        {% if profile and profile[4] == "other" %}
+        selected
+        {% endif %}>
+          Other
+        </option>
+      </select>
+      <button type="submit" id="save">Save</button>
+      <a type="submit" name="logout" href="/logout" id="logout">Logout</a>
+      <a id="delete" name="delete_acc" href="/delete">Delete Account</a> 
+    </form>
+
+    <div class="posts"><a href="/user_posts">Posts</a></div>
+
+    <div class="bottom-nav">
+      <a href="/home">
+        <img src="{{ url_for('static', filename='icons/home.png') }}" />
+      </a>
+
+      <a href="/search">
+        <img src="{{ url_for('static', filename='icons/search.png') }}" />
+      </a>
+
+      <a href="/add" class="active">
+        <img src="{{ url_for('static', filename='icons/add.png') }}" />
+      </a>
+
+      <a href="/notification">
+        <img src="{{ url_for('static', filename='icons/heart.png') }}" />
+      </a>
+
+      <a href="/profile">
+        <img src="{{ url_for('static', filename='icons/profile.png') }}" />
+      </a>
+    </div>
+  </body>
+  <script src="{{ url_for('static', filename='profile.js') }}"></script>
+</html>

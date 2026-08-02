@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Posts</title>
+    <link rel="stylesheet" href="{{url_for('static', filename='user_posts.css')}}">
+</head>
+
+<body>
+    <div id="navbar">
+        <div id="back-container">
+            <a href="/profile">
+              <img src="{{ url_for('static', filename='icons/turn-back.png')}}">
+            </a>
+        </div>
+
+        <h3>YOUR POSTS</h3>
+        <hr>
+    </div>
+
+    <div id="posts-container">
+
+        {% for post in posts %}
+
+        <div class="post">
+
+            <div class="post-actions">
+
+                <a href="{{ url_for('posts_bp.edit_post', post_id=post['id']) }}">
+                    <img
+                        class="action-icon"
+                        src="{{ url_for('static', filename='icons/edit.png') }}"
+                        alt="Edit">
+                </a>
+
+                <form
+                    action="{{ url_for('posts_bp.delete_post', post_id=post['id']) }}"
+                    method="POST">
+
+                    <button class="icon-btn" type="submit">
+                        <img
+                            class="action-icon"
+                            src="{{ url_for('static', filename='icons/trash.png') }}"
+                            alt="Delete">
+                    </button>
+
+                </form>
+
+            </div>
+
+            <img
+                class="post-image"
+                src="{{ url_for(
+                'static',
+                filename='users/' + username + '/' + post['post']
+            ) }}">
+
+            <p>{{ post['caption'] }}</p>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+</body>
+</html>

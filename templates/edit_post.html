@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Post</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static',
+          filename='edit_post.css') }}">
+</head>
+<body>
+
+    <h2>Edit Post</h2>
+
+    <form method="POST"
+          enctype="multipart/form-data">
+
+        <div class="preview">
+
+            <img src="{{ url_for(
+                'static',
+                filename='users/' + username + '/' + post['post']
+            ) }}">
+
+        </div>
+
+        <label>Caption</label>
+
+        <textarea
+            name="caption"
+            rows="4">{{ post['caption'] }}</textarea>
+
+        <label>Replace Image (Optional)</label>
+
+        <input
+            type="file"
+            name="new_image"
+            accept="image/*">
+
+        <button type="submit">
+            Save Changes
+        </button>
+
+    </form>
+
+</body>
+</html>

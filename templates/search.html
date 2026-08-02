@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='search.css') }}">
+</head>
+<body>
+
+    <div class="search-container">
+        <input type="text"
+               id="searchInput"
+               class="searchInput"
+               placeholder="Search for users...">
+        <button class="searchButton">Search</button>
+    </div>
+    
+
+    <!-- Search Results -->
+    <div id="search-results" class="search-results">
+    </div>
+
+    <div class="bottom-nav">
+        <a href="/home">
+            <img src="{{ url_for('static', filename='icons/home.png') }}">
+        </a>
+
+        <a href="#">
+            <img src="{{ url_for('static', filename='icons/search.png') }}">
+        </a>
+
+        <a href="/add">
+            <img src="{{ url_for('static', filename='icons/add.png') }}">
+        </a>
+
+        <a href="/notification">
+            <img src="{{ url_for('static', filename='icons/heart.png') }}">
+        </a>
+
+        <a href="/profile">
+            <img src="{{ url_for('static', filename='icons/profile.png') }}">
+        </a>
+    </div>
+
+    <script src="{{ url_for('static', filename='search.js') }}"></script>
+
+</body>
+</html>

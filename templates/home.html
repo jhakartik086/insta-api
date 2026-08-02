@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='home.css') }}"
+    />
+  </head>
+  <body>
+    {% for post in posts %}
+
+    <div id="view-post">
+      <div id="user">
+        <img
+          class="profile-pic"
+          src="{{ url_for(
+            'static',
+            filename='profile_pics/' + userpics[post['username']]['profile_pic']
+        ) }}"
+        />
+
+        <div class="user-info">
+          <span class="username">{{ post['username'] }}</span>
+        </div>
+
+        <button class="follow-btn" data-user="{{ post['username'] }}" onclick="toggleFollow(this)">Follow</button>
+      </div>
+
+      <div id="all-posts">
+        <!-- <img src="{{ url_for(
+          'static',
+          filename = 'users/' + username + '/' + post['post']
+        ) }}> -->
+        <img
+          class="post-image"
+          src="{{ url_for(
+            'static',
+            filename='users/' + post['username'] + '/' + post['post']
+        ) }}"
+        />
+        <!-- Caption -->
+
+        <div class="caption">
+          <span class="username">{{ post['username'] }}</span>
+          {{ post['caption'] }}
+        </div>
+      </div>
+    </div>
+    <div class="bottom-nav">
+      <a href="#">
+        <img src="{{ url_for('static', filename='icons/home.png') }}" />
+      </a>
+
+      <a href="/search">
+        <img src="{{ url_for('static', filename='icons/search.png') }}" />
+      </a>
+
+      <a href="/add" class="active">
+        <img src="{{ url_for('static', filename='icons/add.png') }}" />
+      </a>
+
+      <a href="/notification">
+        <img src="{{ url_for('static', filename='icons/heart.png') }}" />
+      </a>
+
+      <a href="/profile">
+        <img src="{{ url_for('static', filename='icons/profile.png') }}" />
+      </a>
+    </div>
+    {% endfor %}
+    <script src="{{ url_for('static', filename='home.js') }}"></script>
+  </body>
+</html>

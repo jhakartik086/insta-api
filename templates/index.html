@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+  <title>Welcome</title>
+</head>
+
+<body>
+
+  <div class="circle"></div>
+  <div class="circle"></div>
+
+  <div class="container">
+
+    <div class="logo">
+      <img src="{{ url_for('static', filename='icons/logo.png') }}" alt="Logo">
+    </div>
+
+    <h1>Welcome to Insta API</h1>
+
+    <p>
+      Connect, Share and Explore with your own social platform.
+    </p>
+
+    <div class="btns">
+      <a href="/login" class="btn login">Login</a>
+      <a href="/signup" class="btn signup">Sign Up</a>
+    </div>
+
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notification</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='notification.css') }}">
+</head>
+<body>
+  <div class="container">
+
+    <div class="tabs">
+        <button class="tab-btn active" onclick="showTab('followers')">
+            Followers
+        </button>
+
+        <button class="tab-btn" onclick="showTab('following')">
+            Following
+        </button>
+    </div>
+
+    <!-- Followers -->
+    <div id="followers" class="tab-content active">
+
+        {% for user in followers %}
+        <div class="user-card">
+            <img src="{{ url_for('static', filename='profile_pics/' + user['profile_pic']) }}">
+
+            <div class="info">
+                <h3>{{ user['username'] }}</h3>
+            </div>
+        </div>
+        {% endfor %}
+
+    </div>
+
+    <!-- Following -->
+    <div id="following" class="tab-content">
+
+        {% for user in following %}
+        <div class="user-card">
+            <img src="{{ url_for('static', filename='profile_pics/' + user['profile_pic']) }}">
+
+            <div class="info">
+                <h3>{{ user['username'] }}</h3>
+            </div>
+        </div>
+        {% endfor %}
+
+    </div>
+
+</div>
+
+    <div class="bottom-nav">
+      <a href="/home">
+        <img src="{{ url_for('static', filename='icons/home.png') }}" />
+      </a>
+
+      <a href="/search">
+        <img src="{{ url_for('static', filename='icons/search.png') }}" />
+      </a>
+
+      <a href="/add">
+        <img src="{{ url_for('static', filename='icons/add.png') }}"/>
+      </a>
+
+      <a href="/notification">
+        <img src="{{ url_for('static', filename='icons/heart.png') }}" class="active" />
+      </a>
+
+      <a href="/profile">
+        <img src="{{ url_for('static', filename='icons/profile.png') }}" />
+      </a>
+    </div>
+  </body>
+  
+</body>
+<script src="{{ url_for('static', filename='notification.js') }}"></script>
+</html>

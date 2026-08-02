@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Add</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='add.css') }}" />
+  </head>
+  <body>
+    <form action="/add" method="POST" enctype="multipart/form-data">
+      <div class="upload-box" id="uploadBox">
+        <p>Drag & Drop Image Here</p>
+        <p>or</p>
+
+        <button type="button" onclick="fileInput.click()">Choose Image</button>
+
+        <input name="user_img" type="file" id="fileInput" accept="image/*" />
+
+        <img id="preview" />
+      </div>
+
+      <input type="text" id="caption" name="caption" placeholder="Write a caption..." />
+
+      <button type="submit" name="share" id="share">Share</button>
+    </form>
+
+    <div class="bottom-nav">
+      <a href="/home">
+        <img src="{{ url_for('static', filename='icons/home.png') }}" />
+      </a>
+
+      <a href="/search">
+        <img src="{{ url_for('static', filename='icons/search.png') }}" />
+      </a>
+
+      <a href="/add">
+        <img
+          src="{{ url_for('static', filename='icons/add.png') }}"
+          class="active"
+        />
+      </a>
+
+      <a href="/notification">
+        <img src="{{ url_for('static', filename='icons/heart.png') }}" />
+      </a>
+
+      <a href="/profile">
+        <img src="{{ url_for('static', filename='icons/profile.png') }}" />
+      </a>
+    </div>
+  </body>
+  <script src="{{ url_for('static', filename='add.js') }}"></script>
+</html>
