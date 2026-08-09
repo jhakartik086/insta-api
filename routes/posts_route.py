@@ -209,3 +209,12 @@ def delete_post():
 
     return redirect('/user_posts')
 
+@posts_bp.route('/view/<username>/posts')
+def view_posts(username):
+    posts = get_all_posts(username)
+
+    return render_template(
+        "view_user_posts.html",
+        username=username,
+        posts=posts
+    )

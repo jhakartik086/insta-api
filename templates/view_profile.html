@@ -47,6 +47,10 @@
 
         <input type="text" id="gender" value="{{ profile[4] }}" readonly />
       </div>
+      
+      <div class="view-posts">
+        <a href="{{ url_for('posts_bp.view_posts', username=profile.username) }}">View Posts</a>
+      </div>
     </div>
   </body>
 </html>
