@@ -25,29 +25,7 @@
 
         <div class="post">
 
-            <div class="post-actions">
-
-                <a href="{{ url_for('posts_bp.edit_post', post_id=post['id']) }}">
-                    <img
-                        class="action-icon"
-                        src="{{ url_for('static', filename='icons/edit.png') }}"
-                        alt="Edit">
-                </a>
-
-                <form
-                    action="{{ url_for('posts_bp.delete_post', post_id=post['id']) }}"
-                    method="POST">
-
-                    <button class="icon-btn" type="submit">
-                        <img
-                            class="action-icon"
-                            src="{{ url_for('static', filename='icons/trash.png') }}"
-                            alt="Delete">
-                    </button>
-
-                </form>
-
-            </div>
+            <div class="posts-layout"></div>
 
             <img
                 class="post-image"

@@ -25,7 +25,7 @@ h3{
     gap:20px;
 }
 
-.post-actions{
+.posts-layout{
     display:flex;
     justify-content:flex-end;
     align-items:center;
