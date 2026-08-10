@@ -4,9 +4,10 @@ from routes.posts_route import posts_bp
 from db import *
 from logger import logger_setup
 import logging
+import os
 
 app = Flask(__name__)
-app.secret_key = 'KJ08654'
+app.secret_key = os.environ["SECRET_KEY"]
 
 #init database
 init_users_db()
