@@ -5,6 +5,9 @@ from db import *
 from logger import logger_setup
 import logging
 import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 app = Flask(__name__)
 app.secret_key = os.environ["SECRET_KEY"]
