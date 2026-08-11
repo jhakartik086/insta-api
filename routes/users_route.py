@@ -163,17 +163,19 @@ def delete():
 @users_bp.route("/search_api")
 def search():
     query = request.args.get("q", "")
+    username = session['username']
 
     conn = sqlite3.connect("users.db")
     conn.row_factory = sqlite3.Row
     cur = conn.cursor()
 
     cur.execute("""
-        SELECT username, profile_pic
-        FROM profile
-        WHERE username LIKE ?
-        LIMIT 10
-    """, (f"%{query}%",))
+    SELECT username, profile_pic
+    FROM profile
+    WHERE username LIKE ?
+    AND username != ?
+    LIMIT 10
+    """, (f"%{query}%", username))
 
     rows = cur.fetchall()
     conn.close()

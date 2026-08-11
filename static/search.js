@@ -35,7 +35,7 @@ input.addEventListener("input", async () => {
         return;
     }
 
-    const response = await fetch(`/search_api?q=${query}`);
+    const response = await fetch(`/search_api?q=${encodeURIComponent(query)}`);
     const users = await response.json();
 
     results.innerHTML = "";

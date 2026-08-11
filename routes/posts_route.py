@@ -22,8 +22,7 @@ def home():
     posts = get_post_randomly(username)
     userpics = get_all_profile(username)
 
-    print(type(userpics))
-    print(userpics)
+    
 
     return render_template('home.html',username=username,posts=posts,userpics=userpics)
     
