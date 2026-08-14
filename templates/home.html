@@ -14,17 +14,21 @@
 
     <div id="view-post">
       <div id="user">
-        <img
-          class="profile-pic"
-          src="{{ url_for(
-            'static',
-            filename='profile_pics/' + userpics[post['username']]['profile_pic']
-        ) }}"
-        />
+        <a href="{{ url_for('users_bp.view_user', username=post['username']) }}">
+  <img
+    class="profile-pic"
+    src="{{ url_for(
+      'static',
+      filename='profile_pics/' + userpics[post['username']]['profile_pic']
+    ) }}"
+  />
+</a>
 
-        <div class="user-info">
-          <span class="username">{{ post['username'] }}</span>
-        </div>
+<div class="user-info">
+  <a href="{{ url_for('users_bp.view_user', username=post['username']) }}">
+    <span class="username">{{ post['username'] }}</span>
+  </a>
+</div>
 
         <button class="follow-btn" data-user="{{ post['username'] }}" onclick="toggleFollow(this)">Follow</button>
       </div>
