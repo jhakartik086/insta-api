@@ -6,3 +6,5 @@ logs/
 .env
 .vscode/
 __pycache__/
+static/users/
+static/profile_pics/
