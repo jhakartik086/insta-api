@@ -23,6 +23,7 @@ h3{
     flex-direction:column;
     align-items:center;
     gap:20px;
+    padding-top:60px;
 }
 
 .post-actions{
@@ -46,4 +47,35 @@ h3{
     background:none;
     padding:0;
     cursor:pointer;
+}
+
+.top-navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 60px;
+
+    display: flex;
+    align-items: center;
+
+    background: white;
+    border-bottom: 1px solid #ddd;
+
+    z-index: 1000;
+}
+
+.back-btn {
+    position: absolute;
+    left: 20px;
+
+    text-decoration: none;
+    color: black;
+    font-size: 30px;
+}
+
+.top-navbar h3 {
+    width: 100%;
+    text-align: center;
+    margin: 0;
 }

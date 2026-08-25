@@ -10,8 +10,10 @@
           filename='edit_post.css') }}">
 </head>
 <body>
-
-    <h2>Edit Post</h2>
+    <div class="top-navbar">
+        <a href="javascript:history.back()" class="back-btn"><img src="{{ url_for('static', filename='icons/turn-back.png')}}"></a>
+        <h3>Edit Post</h3>
+    </div>
 
     <form method="POST"
           enctype="multipart/form-data">

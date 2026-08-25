@@ -2,7 +2,7 @@ import sqlite3
 from config import POSTS_DB_PATH, USERS_DB_PATH
 
 def get_post_conn():
-    conn = sqlite3.connect(POSTS_DB_PATH)
+    conn = sqlite3.connect(POSTS_DB_PATH, timeout=10)
     conn.row_factory = sqlite3.Row
     return conn
 

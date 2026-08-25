@@ -8,15 +8,9 @@
 </head>
 
 <body>
-    <div id="navbar">
-        <div id="back-container">
-            <a href="/profile">
-              <img src="{{ url_for('static', filename='icons/turn-back.png')}}">
-            </a>
-        </div>
-
+    <div class="top-navbar">
+        <a href="/profile" class="back-btn"><img src="{{ url_for('static', filename='icons/turn-back.png')}}"></a>
         <h3>YOUR POSTS</h3>
-        <hr>
     </div>
 
     <div id="posts-container">
@@ -34,19 +28,17 @@
                         alt="Edit">
                 </a>
 
-                <form
-                    action="{{ url_for('posts_bp.delete_post', post_id=post['id']) }}"
-                    method="POST">
-
-                    <button class="icon-btn" type="submit">
-                        <img
-                            class="action-icon"
-                            src="{{ url_for('static', filename='icons/trash.png') }}"
-                            alt="Delete">
-                    </button>
-
-                </form>
-
+                <button
+                    class="icon-btn delete-btn"
+                    type="button"
+                    data-url="{{ url_for('posts_bp.delete_post', post_id=post['id']) }}"
+                >
+                    <img
+                        class="action-icon"
+                        src="{{ url_for('static', filename='icons/trash.png') }}"
+                        alt="Delete"
+                    >
+                </button>
             </div>
 
             <img
@@ -63,6 +55,6 @@
         {% endfor %}
 
     </div>
-
+    <script  src="{{url_for('static', filename='user_posts.js')}}"></script>
 </body>
 </html>

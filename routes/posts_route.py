@@ -206,7 +206,7 @@ def delete_post():
         os.remove(image_path)
 
 
-    return redirect('/user_posts')
+    return '', 204
 
 @posts_bp.route('/view/<username>/posts')
 def view_posts(username):
