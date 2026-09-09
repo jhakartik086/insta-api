@@ -10,74 +10,98 @@
     />
   </head>
   <body>
-    <form id="profileForm" method="POST" enctype="multipart/form-data">
-      <div class="profile-container">
-        <label for="profileInput">
-          {% if profile and profile[1] %}
-          <img
-            src="{{ url_for('static', filename='profile_pics/' + profile[1]) }}"
-            id="profilePreview"
-            class="profile-pic"
+    <main class="page">
+      <form id="profileForm" method="POST" enctype="multipart/form-data">
+        <div class="profile-container">
+          <label for="profileInput" class="avatar-label">
+            {% if profile and profile[1] %}
+            <img
+              src="{{ url_for('static', filename='profile_pics/' + profile[1]) }}"
+              id="profilePreview"
+              class="profile-pic"
+            />
+            {% else %}
+            <img
+              src="{{ url_for('static', filename='default.png') }}"
+              id="profilePreview"
+              class="profile-pic"
+            />
+            {% endif %}
+            <span class="avatar-edit-badge" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 20h9" />
+                <path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z" />
+              </svg>
+            </span>
+          </label>
+
+          <input
+            name="profile_pic"
+            type="file"
+            id="profileInput"
+            accept="image/*"
           />
-          {% else %}
-          <img
-            src="{{ url_for('static', filename='default.png') }}"
-            id="profilePreview"
-            class="profile-pic"
+        </div>
+
+        <div class="field field--static">
+          <span class="field-label">Username</span>
+          <input
+            type="text"
+            id="username"
+            value="{{ session['username'] }}"
+            name="username"
+            readonly
           />
-          {% endif %}
-        </label>
+        </div>
 
-        <input
-          name="profile_pic"
-          type="file"
-          id="profileInput"
-          accept="image/*"
-        />
-      </div>
+        <div class="field">
+          <label class="field-label" for="bio">Bio</label>
+          <input
+            type="text"
+            name="bio"
+            id="bio"
+            placeholder="Tell people about yourself"
+            value="{{ profile[3] if profile else '' }}"
+          />
+        </div>
 
-      <input
-        type="text"
-        id="username"
-        value="{{ session['username'] }}"
-        name="username"
-        readonly
-      />
-      <input
-        type="text"
-        name="bio"
-        id="bio"
-        placeholder="Bio"
-        value="{{ profile[3] if profile else '' }}"
-      />
-      <select id="gender" name="gender">
-        <option value="male"
-        {% if profile and profile[4] == "male" %}
-        selected
-        {% endif %}>
-            Male
-        </option>
+        <div class="field">
+          <label class="field-label" for="gender">Gender</label>
+          <div class="select-wrap">
+            <select id="gender" name="gender">
+              <option value="male"
+              {% if profile and profile[4] == "male" %}
+              selected
+              {% endif %}>
+                  Male
+              </option>
 
-        <option value="female"
-        {% if profile and profile[4] == "female" %}
-        selected
-        {% endif %}>
-          Female
-        </option>
+              <option value="female"
+              {% if profile and profile[4] == "female" %}
+              selected
+              {% endif %}>
+                Female
+              </option>
 
-        <option value="other"
-        {% if profile and profile[4] == "other" %}
-        selected
-        {% endif %}>
-          Other
-        </option>
-      </select>
-      <button type="submit" id="save">Save</button>
-      <a type="submit" name="logout" href="/logout" id="logout">Logout</a>
-      <a id="delete" name="delete_acc" href="/delete">Delete Account</a> 
-    </form>
+              <option value="other"
+              {% if profile and profile[4] == "other" %}
+              selected
+              {% endif %}>
+                Other
+              </option>
+            </select>
+          </div>
+        </div>
 
-    <div class="posts"><a href="/user_posts">Posts</a></div>
+        <div class="actions">
+          <button type="submit" id="save">Save changes</button>
+          <a type="submit" name="logout" href="/logout" id="logout">Log out</a>
+          <a id="delete" name="delete_acc" href="/delete">Delete account</a>
+        </div>
+      </form>
+
+      <div class="posts"><a href="/user_posts">View your posts</a></div>
+    </main>
 
     <div class="bottom-nav">
       <a href="/home">

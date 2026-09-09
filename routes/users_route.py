@@ -62,7 +62,17 @@ def login():
         else:
             return jsonify({'error': 'Invalid username or password'}), 401
 
-UPLOAD_FOLDER = "static/profile_pics"
+BASE_DIR = os.path.abspath(
+    os.path.join(os.path.dirname(__file__), "..")
+)
+
+UPLOAD_FOLDER = os.path.join(
+    BASE_DIR,
+    "static",
+    "profile_pics"
+)
+
+os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 
 ALLOWED_EXTENSIONS = {"png", "jpg", "jpeg", "webp"}
 
@@ -84,14 +94,16 @@ def profile():
 
     if request.method == 'POST':
 
-        filename = None
+        old_profile = get_profile(username)
+
+        # Keep existing profile picture
+        filename = old_profile[1] if old_profile else None
 
         file = request.files.get("profile_pic")
 
-        if file and allowed_file(file.filename):
+        if file and file.filename and allowed_file(file.filename):
 
-            old_profile = get_profile(username)
-
+            # Delete old picture
             if old_profile and old_profile[1]:
 
                 old_path = os.path.join(
@@ -109,11 +121,19 @@ def profile():
                 filename
             )
 
+            # Save new picture
+            file.save(filepath)
+
         bio = request.form.get('bio')
         gender = request.form.get('gender')
 
-        save_profile(username, bio, gender, filename)
-        file.save(filepath)
+        save_profile(
+            username,
+            bio,
+            gender,
+            filename
+        )
+
         return redirect('/profile')
 
     profile_data = get_profile(username)

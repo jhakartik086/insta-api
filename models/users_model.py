@@ -50,7 +50,7 @@ def save_profile(username, bio, gender,profile_pic):
         VALUES (?, ?, ?)
         ON CONFLICT(username) DO UPDATE SET
             bio = excluded.bio,
-            gender = excluded.gender,
+            gender = excluded.gender
     """, (username, bio, gender))
     
     conn.commit()
