@@ -1,4 +1,4 @@
-from flask import Blueprint, request, jsonify, redirect, render_template, session
+from flask import Blueprint, request, jsonify, redirect, render_template, session, flash
 from hash_pass import hash_password
 import hashlib
 from models.users_model import *
@@ -101,28 +101,31 @@ def profile():
 
         file = request.files.get("profile_pic")
 
-        if file and file.filename and allowed_file(file.filename):
+        if file and file.filename:
 
-            # Delete old picture
-            if old_profile and old_profile[1]:
+            if allowed_file(file.filename):
+                # Delete old picture
+                if old_profile and old_profile[1]:
 
-                old_path = os.path.join(
-                    UPLOAD_FOLDER,
+                    old_path = os.path.join(
+                       UPLOAD_FOLDER,
                     old_profile[1]
                 )
 
                 if os.path.exists(old_path):
                     os.remove(old_path)
 
-            filename = str(time.time()) + "_" + secure_filename(file.filename)
+                filename = str(time.time()) + "_" + secure_filename(file.filename)
 
-            filepath = os.path.join(
-                UPLOAD_FOLDER,
-                filename
-            )
+                filepath = os.path.join(
+                    UPLOAD_FOLDER,
+                    filename
+                )
 
-            # Save new picture
-            file.save(filepath)
+                # Save new picture
+                file.save(filepath)
+            else:
+                flash("Unsupported file type. Please upload a PNG, JPG, JPEG or WEBP image.", "error")
 
         bio = request.form.get('bio')
         gender = request.form.get('gender')
@@ -160,7 +163,7 @@ def delete():
 
     # Delete user data from databases
     delete_profile_pic(username)
-    delete_posts(username)
+    # delete_posts(username)
     delete_profile(username)
     delete_user(username)
 

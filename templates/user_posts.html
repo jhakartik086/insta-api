@@ -20,8 +20,7 @@
         <div class="post">
 
             <div class="post-actions">
-
-                <a href="{{ url_for('posts_bp.edit_post', post_id=post['id']) }}">
+                <a href="{{ url_for('posts_bp.edit_post', post_id=post['id']) }}" class="icon-btn edit-link">
                     <img
                         class="action-icon"
                         src="{{ url_for('static', filename='icons/edit.png') }}"
@@ -41,15 +40,25 @@
                 </button>
             </div>
 
-            <img
-                class="post-image"
-                src="{{ url_for(
-                'static',
-                filename='users/' + username + '/' + post['post']
-            ) }}">
+            <div class="post-image-wrap">
+                <img
+                    class="post-image"
+                    src="{{ url_for(
+                    'static',
+                    filename='users/' + username + '/' + post['post']
+                ) }}">
+            </div>
 
-            <p>{{ post['caption'] }}</p>
+            {% if post['caption'] %}
+            <p class="post-caption">{{ post['caption'] }}</p>
+            {% endif %}
 
+        </div>
+
+        {% else %}
+
+        <div class="empty-state">
+            <p>No posts yet</p>
         </div>
 
         {% endfor %}

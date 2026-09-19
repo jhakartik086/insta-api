@@ -4,19 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Posts</title>
-    <link rel="stylesheet" href="{{url_for('static', filename='view_user_posts.css')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename='user_posts.css')}}">
 </head>
 
 <body>
-    <div id="navbar">
-        <div id="back-container">
-            <a href="javascript:history.back()">
-              <img src="{{ url_for('static', filename='icons/turn-back.png')}}">
-            </a>
-        </div>
-
-        <h3>{{ username }} POSTS</h3>
-        <hr>
+    <div class="top-navbar">
+        <a href="javascript:history.back()" class="back-btn"><img src="{{ url_for('static', filename='icons/turn-back.png')}}"></a>
+        <h3>{{ username }}'s POSTS</h3>
     </div>
 
     <div id="posts-container">
@@ -25,22 +19,29 @@
 
         <div class="post">
 
-            <div class="posts-layout"></div>
+            <div class="post-image-wrap">
+                <img
+                    class="post-image"
+                    src="{{ url_for(
+                    'static',
+                    filename='users/' + username + '/' + post['post']
+                ) }}">
+            </div>
 
-            <img
-                class="post-image"
-                src="{{ url_for(
-                'static',
-                filename='users/' + username + '/' + post['post']
-            ) }}">
+            {% if post['caption'] %}
+            <p class="post-caption">{{ post['caption'] }}</p>
+            {% endif %}
 
-            <p>{{ post['caption'] }}</p>
+        </div>
 
+        {% else %}
+
+        <div class="empty-state">
+            <p>No posts yet</p>
         </div>
 
         {% endfor %}
 
     </div>
-
 </body>
 </html>

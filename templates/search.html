@@ -8,14 +8,19 @@
 </head>
 <body>
 
-    <div class="search-container">
-        <input type="text"
-               id="searchInput"
-               class="searchInput"
-               placeholder="Search for users...">
-        <button class="searchButton">Search</button>
+    <div class="top-navbar">
+        <h3>SEARCH</h3>
     </div>
-    
+
+    <div class="search-container">
+        <div class="search-input-wrap">
+            <input type="text"
+                   id="searchInput"
+                   class="searchInput"
+                   placeholder="Search for users...">
+            <button class="searchButton">Search</button>
+        </div>
+    </div>
 
     <!-- Search Results -->
     <div id="search-results" class="search-results">
@@ -26,7 +31,7 @@
             <img src="{{ url_for('static', filename='icons/home.png') }}">
         </a>
 
-        <a href="#">
+        <a href="#" class="active">
             <img src="{{ url_for('static', filename='icons/search.png') }}">
         </a>
 

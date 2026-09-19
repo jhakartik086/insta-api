@@ -7,16 +7,22 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='add.css') }}" />
   </head>
   <body>
-    <form action="/add" method="POST" enctype="multipart/form-data">
-      <div class="upload-box" id="uploadBox">
-        <p>Drag & Drop Image Here</p>
-        <p>or</p>
+    <div class="top-navbar">
+      <h3>NEW POST</h3>
+    </div>
 
-        <button type="button" onclick="fileInput.click()">Choose Image</button>
+    <form action="/add" method="POST" enctype="multipart/form-data" class="add-form">
+      <div class="upload-box" id="uploadBox">
+        <img id="preview" />
+
+        <div class="upload-placeholder">
+          <img class="upload-icon" src="{{ url_for('static', filename='icons/add.png') }}" alt="" />
+          <p class="primary-text">Drag & Drop Image Here</p>
+          <p class="secondary-text">or</p>
+          <button type="button" class="choose-btn" onclick="fileInput.click()">Choose Image</button>
+        </div>
 
         <input name="user_img" type="file" id="fileInput" accept="image/*" />
-
-        <img id="preview" />
       </div>
 
       <input type="text" id="caption" name="caption" placeholder="Write a caption..." />

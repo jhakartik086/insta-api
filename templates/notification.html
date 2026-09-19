@@ -7,6 +7,10 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='notification.css') }}">
 </head>
 <body>
+  <div class="top-navbar">
+    <h3>ACTIVITY</h3>
+  </div>
+
   <div class="container">
 
     <div class="tabs">
@@ -30,6 +34,10 @@
                 <h3>{{ user['username'] }}</h3>
             </div>
         </div>
+        {% else %}
+        <div class="empty-state">
+            <p>No followers yet</p>
+        </div>
         {% endfor %}
 
     </div>
@@ -44,6 +52,10 @@
             <div class="info">
                 <h3>{{ user['username'] }}</h3>
             </div>
+        </div>
+        {% else %}
+        <div class="empty-state">
+            <p>Not following anyone yet</p>
         </div>
         {% endfor %}
 
@@ -72,8 +84,6 @@
         <img src="{{ url_for('static', filename='icons/profile.png') }}" />
       </a>
     </div>
-  </body>
-  
 </body>
 <script src="{{ url_for('static', filename='notification.js') }}"></script>
 </html>
