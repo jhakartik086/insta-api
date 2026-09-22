@@ -7,7 +7,7 @@ def get_post_conn():
     return conn
 
 def get_user_conn():
-    conn = sqlite3.connect(USERS_DB_PATH)
+    conn = sqlite3.connect(USERS_DB_PATH, timeout=10)
     conn.row_factory = sqlite3.Row
     return conn
 
@@ -59,14 +59,22 @@ def profile_db():
     conn.close()
 
 def followers_db():
-    conn = get_user_conn()
-    cur = conn.cursor()
 
-    cur.execute('''
-    CREATE TABLE IF NOT EXISTS followers(
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        follower TEXT NOT NULL,
-        following TEXT,
-        UNIQUE(follower, following)
-    )
-    ''')
+    conn = get_user_conn()
+
+    try:
+        cur = conn.cursor()
+
+        cur.execute("""
+            CREATE TABLE IF NOT EXISTS followers (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                follower TEXT NOT NULL,
+                following TEXT NOT NULL,
+                UNIQUE(follower, following)
+            )
+        """)
+
+        conn.commit()
+
+    finally:
+        conn.close()

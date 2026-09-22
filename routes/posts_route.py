@@ -13,20 +13,24 @@ logger = logger_setup()
 posts_bp=Blueprint('posts_bp',__name__)
 
 # HOME
-@posts_bp.route('/home',methods=['GET'])
+@posts_bp.route('/home', methods=['GET'])
 def home():
     if 'username' not in session:
         return redirect('/login')
-    
+
     username = session['username']
+
     posts = get_post_randomly(username)
     userpics = get_all_profile(username)
+    following_users = get_following(username)
 
-    
-
-    return render_template('home.html',username=username,posts=posts,userpics=userpics)
-    
-    # return render_template('home.html')
+    return render_template(
+        'home.html',
+        username=username,
+        posts=posts,
+        userpics=userpics,
+        following_users=following_users
+    )
 
 UPLOAD_FOLDER = "static/users/"
 

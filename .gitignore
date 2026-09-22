@@ -8,3 +8,4 @@ logs/
 __pycache__/
 static/users/
 static/profile_pics/
+test.py

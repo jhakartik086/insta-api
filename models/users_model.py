@@ -140,3 +140,94 @@ def get_all_profile(username):
         }
 
     return profile_pics
+
+def follow_user(follower, following):
+
+    conn = get_user_conn()
+
+    try:
+        cur = conn.cursor()
+
+        cur.execute("""
+            INSERT OR IGNORE INTO followers(follower, following)
+            VALUES (?, ?)
+        """, (follower, following))
+
+        conn.commit()
+    finally:
+        conn.close()
+
+def is_following(follower, following):
+    conn = get_user_conn()
+
+    try:
+        cur = conn.cursor()
+
+        cur.execute("""
+            SELECT 1
+            FROM followers
+            WHERE follower = ? AND following = ?
+        """, (follower, following))
+
+        return cur.fetchone() is not None
+
+    finally:
+        conn.close()
+
+
+def toggle_follow(follower, following):
+    conn = get_user_conn()
+
+    try:
+        cur = conn.cursor()
+
+        cur.execute("""
+            SELECT 1
+            FROM followers
+            WHERE follower = ? AND following = ?
+        """, (follower, following))
+
+        exists = cur.fetchone()
+
+        if exists:
+            cur.execute("""
+                DELETE FROM followers
+                WHERE follower = ? AND following = ?
+            """, (follower, following))
+
+            following_status = False
+
+        else:
+            cur.execute("""
+                INSERT INTO followers(follower, following)
+                VALUES (?, ?)
+            """, (follower, following))
+
+            following_status = True
+
+        conn.commit()
+
+        return following_status
+
+    finally:
+        conn.close()
+    
+
+def get_following(username):
+    conn = get_user_conn()
+
+    try:
+        cur = conn.cursor()
+
+        cur.execute("""
+            SELECT following
+            FROM followers
+            WHERE follower = ?
+        """, (username,))
+
+        rows = cur.fetchall()
+
+        return {row["following"] for row in rows}
+
+    finally:
+        conn.close()

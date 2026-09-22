@@ -30,7 +30,15 @@
   </a>
 </div>
 
-        <button class="follow-btn" data-user="{{ post['username'] }}" onclick="toggleFollow(this)">Follow</button>
+        <button class="follow-btn"
+        data-user="{{ post['username'] }}"
+        onclick="toggleFollow(this)">
+    {% if post['username'] in following_users %}
+        Following
+    {% else %}
+        Follow
+    {% endif %}
+</button>
       </div>
 
       <div id="all-posts">

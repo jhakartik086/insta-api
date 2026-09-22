@@ -221,3 +221,27 @@ def search_page():
 def view_user(username):
     profile = get_profile(username)
     return render_template('view_profile.html', profile=profile)
+
+@users_bp.route('/follow', methods=['POST'])
+def follow():
+
+    if 'username' not in session:
+        return jsonify({
+            'error': 'Not logged in'
+        }), 401
+
+    data = request.get_json()
+
+    following = data.get('username')
+    follower = session['username']
+
+    if not following:
+        return jsonify({
+            'error': 'Username is required'
+        }), 400
+
+    following_status = toggle_follow(follower, following)
+
+    return jsonify({
+        'following': following_status
+    })
