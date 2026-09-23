@@ -105,6 +105,7 @@ def profile():
 
             if allowed_file(file.filename):
                 # Delete old picture
+                old_path = ''
                 if old_profile and old_profile[1]:
 
                     old_path = os.path.join(

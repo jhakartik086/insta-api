@@ -18,6 +18,7 @@ def get_all_posts(username):
             SELECT id, caption, post
             FROM posts
             WHERE username = ?
+            ORDER BY id DESC
     ''',(username,))
 
     posts = cur.fetchall()

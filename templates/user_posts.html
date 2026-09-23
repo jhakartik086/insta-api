@@ -13,6 +13,16 @@
         <h3>YOUR POSTS</h3>
     </div>
 
+    <div class="sort-bar">
+        <label for="sortSelect" class="sort-label">Sort by</label>
+        <div class="select-wrap">
+            <select id="sortSelect">
+                <option value="latest" selected>Latest</option>
+                <option value="oldest">Oldest</option>
+            </select>
+        </div>
+    </div>
+
     <div id="posts-container">
 
         {% for post in posts %}
@@ -20,7 +30,8 @@
         <div class="post">
 
             <div class="post-actions">
-                <a href="{{ url_for('posts_bp.edit_post', post_id=post['id']) }}" class="icon-btn edit-link">
+
+                <a href="{{ url_for('posts_bp.edit_post', post_id=post['id']) }}">
                     <img
                         class="action-icon"
                         src="{{ url_for('static', filename='icons/edit.png') }}"
@@ -53,12 +64,6 @@
             <p class="post-caption">{{ post['caption'] }}</p>
             {% endif %}
 
-        </div>
-
-        {% else %}
-
-        <div class="empty-state">
-            <p>No posts yet</p>
         </div>
 
         {% endfor %}

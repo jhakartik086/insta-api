@@ -22,6 +22,68 @@ body {
     color: var(--text);
 }
 
+/* ---------- Sort bar ---------- */
+.sort-bar{
+    position: sticky;
+    top: 60px;
+    margin-top: 60px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 8px;
+    padding: 10px 20px;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border);
+    z-index: 999;
+}
+
+.sort-label{
+    font-size: 13px;
+    color: var(--muted);
+}
+
+.sort-bar .select-wrap{
+    position: relative;
+}
+
+.sort-bar select{
+    appearance: none;
+    -webkit-appearance: none;
+    padding: 6px 26px 6px 12px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: var(--surface);
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--primary);
+    cursor: pointer;
+    outline: none;
+}
+
+.sort-bar select:focus{
+    border-color: var(--primary);
+}
+
+.sort-bar .select-wrap::after{
+    content: "";
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    width: 6px;
+    height: 6px;
+    border-right: 2px solid var(--primary);
+    border-bottom: 2px solid var(--primary);
+    transform: translateY(-70%) rotate(45deg);
+    pointer-events: none;
+}
+
+/* posts now flow naturally below the sticky sort bar — no manual offset needed */
+#posts-container{
+    padding-top: 24px;
+}
+
 /* ---------- Top navbar ---------- */
 .top-navbar {
     position: fixed;
