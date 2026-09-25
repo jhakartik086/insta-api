@@ -15,6 +15,7 @@ A Flask-based Instagram-style social media application.
 - Search users
 - View user profiles
 - View user posts
+- Follow system
 
 ## Tech Stack
 
@@ -35,7 +36,6 @@ A Flask-based Instagram-style social media application.
 
 ## Future Features
 
-- Follow system
 - Likes
 - Comments
 - Notifications
