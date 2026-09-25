@@ -231,3 +231,45 @@ def get_following(username):
 
     finally:
         conn.close()
+
+def count_following(username):
+    conn = get_user_conn()
+
+    try:
+        cur = conn.cursor()
+
+        cur.execute('''
+                SELECT COUNT(*)
+                FROM followers
+                WHERE follower = ?
+        ''',(username,))
+        following_count = cur.fetchone()[0]
+        return following_count
+    finally:
+        conn.close()
+
+def count_follower(username):
+    conn = get_user_conn()
+
+    try:
+        cur = conn.cursor()
+
+        print("USERNAME:", username)
+
+        cur.execute("SELECT * FROM followers")
+        print("FOLLOWERS TABLE:", cur.fetchall())
+
+        cur.execute('''
+            SELECT COUNT(*)
+            FROM followers
+            WHERE following = ?
+        ''', (username,))
+
+        follower_count = cur.fetchone()[0]
+
+        print("COUNT:", follower_count)
+
+        return follower_count
+
+    finally:
+        conn.close()

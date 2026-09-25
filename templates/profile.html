@@ -43,6 +43,20 @@
           />
         </div>
 
+        <div class="stats-row">
+            <a href="/notification?tab=followers" class="stat">
+                <span class="stat-count">{{ follower_count if follower_count is defined else 0 }}</span>
+                <span class="stat-label">Followers</span>
+            </a>
+
+            <div class="stat-divider"></div>
+
+            <a href="/notification?tab=following" class="stat">
+                <span class="stat-count">{{ following_count if following_count is defined else 0 }}</span>
+                <span class="stat-label">Following</span>
+            </a>
+        </div>
+
         <div class="field field--static">
           <span class="field-label">Username</span>
           <input

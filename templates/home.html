@@ -10,59 +10,79 @@
     />
   </head>
   <body>
-    {% for post in posts %}
+    <div class="top-navbar">
+      <h3>FEED</h3>
+    </div>
 
-    <div id="view-post">
-      <div id="user">
-        <a href="{{ url_for('users_bp.view_user', username=post['username']) }}">
-  <img
-    class="profile-pic"
-    src="{{ url_for(
-      'static',
-      filename='profile_pics/' + userpics[post['username']]['profile_pic']
-    ) }}"
-  />
-</a>
+    <div class="feed">
+      {% for post in posts %}
 
-<div class="user-info">
-  <a href="{{ url_for('users_bp.view_user', username=post['username']) }}">
-    <span class="username">{{ post['username'] }}</span>
-  </a>
-</div>
+      <div id="view-post">
+        <div id="user">
+          <a
+            href="{{ url_for('users_bp.view_user', username=post['username']) }}"
+          >
+            <img
+              class="profile-pic"
+              src="{{ url_for(
+              'static',
+              filename='profile_pics/' + userpics[post['username']]['profile_pic']
+            ) }}"
+            />
+          </a>
 
-        <button class="follow-btn"
-        data-user="{{ post['username'] }}"
-        onclick="toggleFollow(this)">
-    {% if post['username'] in following_users %}
-        Following
-    {% else %}
-        Follow
-    {% endif %}
-</button>
-      </div>
+          <div class="user-info">
+            <a
+              href="{{ url_for('users_bp.view_user', username=post['username']) }}"
+            >
+              <span class="username">{{ post['username'] }}</span>
+            </a>
+          </div>
 
-      <div id="all-posts">
-        <!-- <img src="{{ url_for(
+          <button
+            class="follow-btn {% if post['username'] in following_users %}following{% endif %}"
+            data-user="{{ post['username'] }}"
+            onclick="toggleFollow(this)"
+          >
+            {% if post['username'] in following_users %} Following {% else %}
+            Follow {% endif %}
+          </button>
+        </div>
+
+        <div id="all-posts">
+          <!-- <img src="{{ url_for(
           'static',
           filename = 'users/' + username + '/' + post['post']
         ) }}> -->
-        <img
-          class="post-image"
-          src="{{ url_for(
+          <img
+            class="post-image"
+            src="{{ url_for(
             'static',
             filename='users/' + post['username'] + '/' + post['post']
         ) }}"
-        />
-        <!-- Caption -->
+          />
+          <!-- Caption -->
 
-        <div class="caption">
-          <span class="username">{{ post['username'] }}</span>
-          {{ post['caption'] }}
+          {% if post['caption'] %}
+          <div class="caption">
+            <span class="username">{{ post['username'] }}</span>
+            {{ post['caption'] }}
+          </div>
+          {% endif %}
         </div>
       </div>
+
+      {% else %}
+
+      <div class="empty-state">
+        <p>No posts to show</p>
+      </div>
+
+      {% endfor %}
     </div>
+
     <div class="bottom-nav">
-      <a href="#">
+      <a href="#" class="active">
         <img src="{{ url_for('static', filename='icons/home.png') }}" />
       </a>
 
@@ -70,7 +90,7 @@
         <img src="{{ url_for('static', filename='icons/search.png') }}" />
       </a>
 
-      <a href="/add" class="active">
+      <a href="/add">
         <img src="{{ url_for('static', filename='icons/add.png') }}" />
       </a>
 
@@ -82,7 +102,6 @@
         <img src="{{ url_for('static', filename='icons/profile.png') }}" />
       </a>
     </div>
-    {% endfor %}
     <script src="{{ url_for('static', filename='home.js') }}"></script>
   </body>
 </html>

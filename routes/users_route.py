@@ -142,9 +142,14 @@ def profile():
 
     profile_data = get_profile(username)
 
+    follower_count = count_follower(username)
+    following_count = count_following(username)
+
     return render_template(
-        'profile.html',
-        profile=profile_data
+    'profile.html',
+    profile=profile_data,
+    follower_count=follower_count,
+    following_count=following_count
     )
 
 # LOGOUT

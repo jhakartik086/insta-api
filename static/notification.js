@@ -1,18 +1,31 @@
-function showTab(tabName){
+function showTab(tabName) {
+    const contents = document.querySelectorAll(".tab-content");
+    const buttons = document.querySelectorAll(".tab-btn");
 
-    document.querySelectorAll(".tab-content").forEach(tab=>{
-        tab.classList.remove("active");
+    contents.forEach(content => {
+        content.classList.remove("active");
     });
 
-    document.querySelectorAll(".tab-btn").forEach(btn=>{
-        btn.classList.remove("active");
+    buttons.forEach(button => {
+        button.classList.remove("active");
     });
 
     document.getElementById(tabName).classList.add("active");
 
-    if(tabName === "followers"){
-        document.querySelectorAll(".tab-btn")[0].classList.add("active");
-    }else{
-        document.querySelectorAll(".tab-btn")[1].classList.add("active");
+    if (tabName === "followers") {
+        buttons[0].classList.add("active");
+    } else {
+        buttons[1].classList.add("active");
     }
+}
+
+
+// Check URL when page loads
+const params = new URLSearchParams(window.location.search);
+const tab = params.get("tab");
+
+if (tab === "following") {
+    showTab("following");
+} else {
+    showTab("followers");
 }
