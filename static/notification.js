@@ -17,10 +17,17 @@ function showTab(tabName) {
     } else {
         buttons[1].classList.add("active");
     }
+
+    // Update the URL so refresh remembers the tab
+    const url = new URL(window.location);
+    if (tabName === "followers") {
+        url.searchParams.delete("tab");
+    } else {
+        url.searchParams.set("tab", tabName);
+    }
+    history.replaceState(null, "", url);
 }
 
-
-// Check URL when page loads
 const params = new URLSearchParams(window.location.search);
 const tab = params.get("tab");
 

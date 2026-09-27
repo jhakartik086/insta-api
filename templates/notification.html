@@ -26,14 +26,16 @@
     <!-- Followers -->
     <div id="followers" class="tab-content active">
 
-        {% for user in followers %}
-        <div class="user-card">
-            <img src="{{ url_for('static', filename='profile_pics/' + user['profile_pic']) }}">
+        {% for user in follower_profile %}
+        <a href="/view/{{ user['username'] }}">
+            <div class="user-card">
+                <img src="{{ url_for('static', filename='profile_pics/' + user['profile_pic']) }}">
 
-            <div class="info">
-                <h3>{{ user['username'] }}</h3>
+                <div class="info">
+                    <h3>{{ user['username'] }}</h3>
+                </div>
             </div>
-        </div>
+        </a>
         {% else %}
         <div class="empty-state">
             <p>No followers yet</p>
@@ -45,14 +47,16 @@
     <!-- Following -->
     <div id="following" class="tab-content">
 
-        {% for user in following %}
-        <div class="user-card">
-            <img src="{{ url_for('static', filename='profile_pics/' + user['profile_pic']) }}">
+        {% for user in following_profile %}
+        <a href="/view/{{ user['username'] }}">
+            <div class="user-card">
+                <img src="{{ url_for('static', filename='profile_pics/' + user['profile_pic']) }}">
 
-            <div class="info">
-                <h3>{{ user['username'] }}</h3>
+                <div class="info">
+                    <h3>{{ user['username'] }}</h3>
+                </div>
             </div>
-        </div>
+        </a>
         {% else %}
         <div class="empty-state">
             <p>Not following anyone yet</p>

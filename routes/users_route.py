@@ -226,7 +226,14 @@ def search_page():
 @users_bp.route('/view/<string:username>')
 def view_user(username):
     profile = get_profile(username)
-    return render_template('view_profile.html', profile=profile)
+    follower_count = count_follower(username)
+    following_count = count_following(username)
+
+    return render_template('view_profile.html',
+    profile=profile,
+    follower_count=follower_count,
+    following_count=following_count
+    )
 
 @users_bp.route('/follow', methods=['POST'])
 def follow():
@@ -251,3 +258,25 @@ def follow():
     return jsonify({
         'following': following_status
     })
+
+@users_bp.route('/notification', methods=['GET'])
+def notification():
+    if 'username' not in session:
+        redirect('/login')
+    
+    username = session['username']
+    following = get_following(username)
+    # print(following)
+    follower = get_follower(username)
+
+    following_profile = []
+    for user in following:
+        # print(user)
+        following_profile.append(get_profile(user))
+    
+    follower_profile = []
+    for user in follower:
+        # print(user)
+        follower_profile.append(get_profile(user))
+
+    return render_template('notification.html',following_profile=following_profile,follower_profile=follower_profile)

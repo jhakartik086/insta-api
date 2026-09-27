@@ -31,11 +31,29 @@
         />
         {% else %}
         <img
-          src="{{ url_for('static', filename='default_profile.png') }}"
+          src="{{ url_for('static', filename='default.png') }}"
           class="profile-pic"
           alt="Default Profile Picture"
         />
         {% endif %}
+      </div>
+
+      <div class="stats-row">
+        <div class="stat">
+          <span class="stat-count"
+            >{{ follower_count if follower_count is defined else 0 }}</span
+          >
+          <span class="stat-label">Followers</span>
+        </div>
+
+        <div class="stat-divider"></div>
+
+        <div class="stat">
+          <span class="stat-count"
+            >{{ following_count if following_count is defined else 0 }}</span
+          >
+          <span class="stat-label">Following</span>
+        </div>
       </div>
 
       <div class="profile-info">
@@ -47,9 +65,12 @@
 
         <input type="text" id="gender" value="{{ profile[4] }}" readonly />
       </div>
-      
+
       <div class="view-posts">
-        <a href="{{ url_for('posts_bp.view_posts', username=profile.username) }}">View Posts</a>
+        <a
+          href="{{ url_for('posts_bp.view_posts', username=profile.username) }}"
+          >View Posts</a
+        >
       </div>
     </div>
   </body>

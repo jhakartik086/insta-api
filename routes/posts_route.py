@@ -105,11 +105,6 @@ def add_post_route():
 
     return render_template("add.html")
 
-#notification
-@posts_bp.route('/notification', methods=['GET'])
-def notification():
-    return render_template('notification.html')
-
 #profile
 @posts_bp.route('/profile', methods=['GET'])
 def profile():
