@@ -1,0 +1,165 @@
+:root{
+  --bg: #f3f0fa;
+  --surface: #ffffff;
+  --ink: #241f33;
+  --muted: #7c7690;
+  --primary: #6c4fd4;
+  --primary-ink: #ffffff;
+  --accent: #b088f9;
+  --border: #e1d9f5;
+}
+
+*{ box-sizing: border-box; }
+
+body{
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    padding-bottom: 40px;
+}
+
+/* ---------- Navbar ---------- */
+#navbar{
+    position: sticky;
+    top: 0;
+    width: 100%;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.92);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border);
+    z-index: 1001;
+}
+
+#back-container{
+    position: absolute;
+    left: 12px;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: background 0.15s ease;
+}
+
+#back-container:hover{
+    background: var(--bg);
+}
+
+#back-container img{
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+}
+
+#navbar h3{
+    margin: 0;
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    color: var(--primary);
+}
+
+.container{
+    max-width: 480px;
+    margin: 0 auto;
+}
+
+/* ---------- Tabs ---------- */
+.tabs{
+    display: flex;
+    background: var(--surface);
+    position: sticky;
+    top: 56px;
+    border-bottom: 1px solid var(--border);
+    z-index: 1000;
+}
+
+.tab-btn{
+    flex: 1;
+    padding: 15px;
+    border: none;
+    background: transparent;
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--muted);
+    cursor: pointer;
+    transition: color 0.15s ease;
+}
+
+.tab-btn:hover{
+    color: var(--ink);
+}
+
+.tab-btn.active{
+    border-bottom: 3px solid var(--primary);
+    font-weight: 700;
+    color: var(--primary);
+}
+
+.tab-content{
+    display: none;
+    animation: fadeIn 0.2s ease;
+}
+
+.tab-content.active{
+    display: block;
+}
+
+@keyframes fadeIn{
+    from{ opacity: 0; transform: translateY(4px); }
+    to{ opacity: 1; transform: translateY(0); }
+}
+
+/* ---------- User card ---------- */
+.user-card{
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 14px 16px;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    text-decoration: none;
+    color: var(--ink);
+    transition: background 0.15s ease;
+}
+
+.user-card:hover{
+    background: var(--bg);
+}
+
+.profile-pic{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--border);
+    flex-shrink: 0;
+}
+
+.user-card .info{
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+}
+
+.username{
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--ink);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* ---------- Empty state ---------- */
+.empty-state{
+    padding: 60px 20px;
+    text-align: center;
+    color: var(--muted);
+    font-size: 15px;
+}

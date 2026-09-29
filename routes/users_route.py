@@ -60,7 +60,7 @@ def login():
             logger.info(f'User logged in: {username}')
             return redirect('/home')
         else:
-            return jsonify({'error': 'Invalid username or password'}), 401
+            return render_template('invalid.html')
 
 BASE_DIR = os.path.abspath(
     os.path.join(os.path.dirname(__file__), "..")
@@ -279,4 +279,33 @@ def notification():
         # print(user)
         follower_profile.append(get_profile(user))
 
-    return render_template('notification.html',following_profile=following_profile,follower_profile=follower_profile)
+    return render_template('notification.html',
+    following_profile=following_profile,
+    follower_profile=follower_profile
+    )
+
+@users_bp.route('/connection/<username>', methods=['GET'])
+def connection(username):
+    # if 'username' not in session:
+    #     redirect('/login')
+    
+    following = get_following(username)
+    print(following)
+    follower = get_follower(username)
+
+    following_profile = []
+    for user in following:
+        print(user)
+        following_profile.append(get_profile(user))
+    
+    follower_profile = []
+    for user in follower:
+        print(user)
+        follower_profile.append(get_profile(user))
+        
+    return render_template(
+    'connections.html',
+    following_profile=following_profile,
+    follower_profile=follower_profile,
+    username=username
+    )

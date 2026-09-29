@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign-in failed</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='login.css') }}">
+    <style>
+        /* Error-page additions; everything else comes from login.css */
+        .avatar.error {
+            background: linear-gradient(135deg, #ff7a7a, #d63a3a);
+            box-shadow: 0 8px 20px rgba(214, 58, 58, 0.4);
+        }
+        h2.error-title { color: #b42323; }
+
+        .error-box {
+            display: flex;
+            gap: 10px;
+            align-items: flex-start;
+            margin: 0 0 22px;
+            padding: 12px 14px;
+            border-radius: 10px;
+            border: 1.5px solid #f3c4c4;
+            background: #fdf1f1;
+            color: #8f2222;
+            font-size: 13px;
+            line-height: 1.5;
+        }
+        .error-box svg { flex: none; width: 18px; height: 18px; margin-top: 1px; fill: #d63a3a; }
+        .error-box ul { margin: 6px 0 0; padding-left: 18px; color: #a34444; }
+
+        .btn-link {
+            display: block;
+            width: 100%;
+            padding: 13px;
+            border-radius: 10px;
+            text-align: center;
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: 600;
+            letter-spacing: 0.3px;
+            color: #fff;
+            background: linear-gradient(135deg, #4facfe, #2a5298);
+            box-shadow: 0 10px 24px rgba(42, 82, 152, 0.35);
+            transition: transform 0.15s ease, box-shadow 0.15s ease, filter 0.15s ease;
+        }
+        .btn-link:hover {
+            transform: translateY(-2px);
+            filter: brightness(1.08);
+            box-shadow: 0 14px 30px rgba(42, 82, 152, 0.45);
+        }
+        .btn-link:focus-visible,
+        .secondary-links a:focus-visible {
+            outline: 3px solid rgba(42, 82, 152, 0.4);
+            outline-offset: 2px;
+        }
+
+        .secondary-links {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 18px;
+            font-size: 13px;
+        }
+        .secondary-links a { color: #2a5298; font-weight: 600; text-decoration: none; }
+        .secondary-links a:hover { text-decoration: underline; }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after { animation: none !important; transition: none !important; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container" role="alert">
+        <div class="avatar error">
+            <svg viewBox="0 0 24 24"><path d="M12 2 1 21h22L12 2zm1 15h-2v-2h2v2zm0-4h-2V9h2v4z"/></svg>
+        </div>
+
+        <h2 class="error-title">Sign-in failed</h2>
+        <p class="subtitle">We couldn't sign you in with those details</p>
+
+        <div class="error-box">
+            <svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>
+            <div>
+                The username or password is incorrect.
+                <ul>
+                    <li>Check for typos and Caps Lock</li>
+                    <li>Passwords are case-sensitive</li>
+                </ul>
+            </div>
+        </div>
+
+        <a class="btn-link" href="{{ url_for('users_bp.login') }}">Try again</a>
+
+        <div class="secondary-links">
+            <a href="#">Reset password</a>
+            <a href="/signup">Create an account</a>
+        </div>
+    </div>
+
+</body>
+</html>

@@ -24,6 +24,9 @@ body {
     align-items: center;
 }
 
+a{
+    text-decoration: none;
+}
 .profile-container {
     width: 350px;
     background: var(--surface);

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ username }} · Followers</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='connections.css') }}">
+</head>
+<body>
+
+  <div id="navbar">
+    <div id="back-container">
+      <a href="javascript:history.back()">
+        <img src="{{ url_for('static', filename='icons/turn-back.png') }}" />
+      </a>
+    </div>
+    <h3>{{ profile_username }}</h3>
+  </div>
+
+  <div class="container">
+
+    <div class="tabs">
+        <button class="tab-btn active" onclick="showTab('followers')">
+            Followers
+        </button>
+
+        <button class="tab-btn" onclick="showTab('following')">
+            Following
+        </button>
+    </div>
+
+    <!-- Followers -->
+    <div id="followers" class="tab-content active">
+
+        {% for user in follower_profile %}
+        <a href="{{ url_for('users_bp.view_user', username=user['username']) }}" class="user-card">
+            <img
+                class="profile-pic"
+                src="{{ url_for('static', filename='profile_pics/' + user['profile_pic']) }}"
+                alt="{{ user['username'] }}"
+            />
+            <div class="info">
+                <span class="username">{{ user['username'] }}</span>
+            </div>
+        </a>
+        {% else %}
+        <div class="empty-state">
+            <p>No followers yet</p>
+        </div>
+        {% endfor %}
+
+    </div>
+
+    <!-- Following -->
+    <div id="following" class="tab-content">
+
+        {% for user in following_profile %}
+        <a href="{{ url_for('users_bp.view_user', username=user['username']) }}" class="user-card">
+            <img
+                class="profile-pic"
+                src="{{ url_for('static', filename='profile_pics/' + user['profile_pic']) }}"
+                alt="{{ user['username'] }}"
+            />
+            <div class="info">
+                <span class="username">{{ user['username'] }}</span>
+            </div>
+        </a>
+        {% else %}
+        <div class="empty-state">
+            <p>Not following anyone yet</p>
+        </div>
+        {% endfor %}
+
+    </div>
+
+  </div>
+
+  <script src="{{ url_for('static', filename='connections.js') }}"></script>
+</body>
+</html>
