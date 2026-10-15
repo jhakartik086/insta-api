@@ -102,6 +102,12 @@
         <img src="{{ url_for('static', filename='icons/profile.png') }}" />
       </a>
     </div>
+
+    <div class="lightbox" id="lightbox" aria-hidden="true">
+      <button type="button" class="lightbox-close" id="lightboxClose" aria-label="Close">&times;</button>
+      <img id="lightboxImg" alt="" />
+    </div>
+
     <script src="{{ url_for('static', filename='home.js') }}"></script>
   </body>
 </html>

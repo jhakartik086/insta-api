@@ -11,6 +11,7 @@
 
   <div class="circle"></div>
   <div class="circle"></div>
+  <div class="circle"></div>
 
   <div class="container">
 
@@ -18,11 +19,26 @@
       <img src="{{ url_for('static', filename='icons/logo.png') }}" alt="Logo">
     </div>
 
-    <h1>Welcome to Insta API</h1>
+    <h1>Welcome to <span class="gradient-text">Insta API</span></h1>
 
     <p>
       Connect, Share and Explore with your own social platform.
     </p>
+
+    <div class="features">
+      <div class="feature">
+        <span class="feature-icon">📸</span>
+        <span class="feature-text">Share</span>
+      </div>
+      <div class="feature">
+        <span class="feature-icon">🤝</span>
+        <span class="feature-text">Connect</span>
+      </div>
+      <div class="feature">
+        <span class="feature-icon">🔍</span>
+        <span class="feature-text">Explore</span>
+      </div>
+    </div>
 
     <div class="btns">
       <a href="/login" class="btn login">Login</a>

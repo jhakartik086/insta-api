@@ -59,7 +59,41 @@ def search_posts():
 
 # ADD POST
 @posts_bp.route('/add', methods=['GET', 'POST'])
-def add_post_route():
+def add():
+    if request.method == 'POST':
+
+        if 'username' not in session:
+            return redirect('/login')
+
+        username = session['username']
+
+        UPLOAD_FOLDER = os.path.join("static", "users", username)
+        os.makedirs(UPLOAD_FOLDER, exist_ok=True)
+
+        caption = request.form.get('caption')
+
+        # all selected files, not just the first
+        images = [
+            img for img in request.files.getlist('user_img')
+            if img and img.filename != ""
+        ]
+
+        if not images:
+            return render_template("add.html", error="Please upload an image")
+
+        for image in images:
+            ext = os.path.splitext(image.filename)[1]
+            filename = f"{username}_{uuid.uuid4()}{ext}"
+            filepath = os.path.join(UPLOAD_FOLDER, filename)
+
+            image.save(filepath)
+            add_post(username, filename, caption)
+
+        return redirect('/user_posts')
+
+    return render_template("add.html")
+
+
     if request.method == 'POST':
 
         if 'username' not in session:

@@ -290,18 +290,19 @@ def connection(username):
     #     redirect('/login')
     
     following = get_following(username)
-    print(following)
+    # print(following)
     follower = get_follower(username)
 
     following_profile = []
     for user in following:
-        print(user)
+        # print(user)
         following_profile.append(get_profile(user))
     
     follower_profile = []
     for user in follower:
-        print(user)
+        # print(user)
         follower_profile.append(get_profile(user))
+    
         
     return render_template(
     'connections.html',

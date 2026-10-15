@@ -135,17 +135,72 @@ body {
     display: none;
 }
 
-#preview {
-    width: 100%;
-    max-height: 500px;
-    object-fit: cover;
-    border-radius: 12px;
+/* ---------- Multi-image previews ---------- */
+.preview-grid {
     display: none;
+    grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+    gap: 8px;
+    width: 100%;
+    max-height: 380px;
+    overflow-y: auto;
+    align-self: flex-start;
 }
 
-/* When an image is chosen, hide the placeholder and let preview fill the box */
-.upload-box:has(#preview[src]:not([src=""])) .upload-placeholder {
-    display: none;
+.preview-item {
+    position: relative;
+    aspect-ratio: 1;
+}
+
+.preview-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 10px;
+    display: block;
+}
+
+.remove-btn {
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    width: 22px;
+    height: 22px;
+    padding: 0;
+    border: none;
+    border-radius: 50%;
+    background: rgba(30, 27, 46, 0.7);
+    color: #fff;
+    font-size: 16px;
+    line-height: 1;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.15s ease, transform 0.1s ease;
+}
+
+.remove-btn:hover {
+    background: #e74c3c;
+}
+
+.remove-btn:active {
+    transform: scale(0.9);
+}
+
+.add-more {
+    aspect-ratio: 1;
+    border: 2px dashed var(--border);
+    border-radius: 10px;
+    background: var(--surface-alt);
+    color: var(--primary);
+    font-size: 28px;
+    cursor: pointer;
+    transition: border-color 0.15s ease, background 0.15s ease;
+}
+
+.add-more:hover {
+    border-color: var(--primary);
+    background: #f0edfe;
 }
 
 /* ---------- Caption ---------- */

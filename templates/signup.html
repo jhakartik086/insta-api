@@ -15,24 +15,46 @@
         <h2 id="title">Create Account</h2>
         <p class="subtitle">Join us — it only takes a minute</p>
 
+        {% with messages = get_flashed_messages() %}
+          {% if messages %}
+            <div class="alert">{{ messages[0] }}</div>
+          {% elif error is defined and error %}
+            <div class="alert">{{ error }}</div>
+          {% endif %}
+        {% endwith %}
+
         <form method="POST">
             <div class="input-group">
-                <svg viewBox="0 0 24 24"><path d="M12 12c2.7 0 4.9-2.2 4.9-4.9S14.7 2.2 12 2.2 7.1 4.4 7.1 7.1 9.3 12 12 12zm0 2.5c-3.3 0-9.8 1.6-9.8 4.9v2.4h19.6v-2.4c0-3.3-6.5-4.9-9.8-4.9z"/></svg>
+                <svg class="field-icon" viewBox="0 0 24 24"><path d="M12 12c2.7 0 4.9-2.2 4.9-4.9S14.7 2.2 12 2.2 7.1 4.4 7.1 7.1 9.3 12 12 12zm0 2.5c-3.3 0-9.8 1.6-9.8 4.9v2.4h19.6v-2.4c0-3.3-6.5-4.9-9.8-4.9z"/></svg>
                 <input type="text" name="username" placeholder="Username" required>
             </div>
 
             <div class="input-group">
-                <svg viewBox="0 0 24 24"><path d="M17 8V7a5 5 0 0 0-10 0v1H5v13h14V8h-2zM9 7a3 3 0 0 1 6 0v1H9V7zm5 8.7V18h-4v-2.3a2 2 0 1 1 4 0z"/></svg>
-                <input type="password" name="password" placeholder="Password" required>
+                <svg class="field-icon" viewBox="0 0 24 24"><path d="M17 8V7a5 5 0 0 0-10 0v1H5v13h14V8h-2zM9 7a3 3 0 0 1 6 0v1H9V7zm5 8.7V18h-4v-2.3a2 2 0 1 1 4 0z"/></svg>
+                <input type="password" name="password" id="password" placeholder="Password" autocomplete="new-password" aria-label="Password" required>
+                <button type="button" class="toggle-pw" id="togglePw" aria-label="Show password">
+                    <svg viewBox="0 0 24 24"><path d="M12 5C7 5 2.7 8.1 1 12.5 2.7 16.9 7 20 12 20s9.3-3.1 11-7.5C21.3 8.1 17 5 12 5zm0 12.5a5 5 0 1 1 0-10 5 5 0 0 1 0 10zm0-8a3 3 0 1 0 0 6 3 3 0 0 0 0-6z"/></svg>
+                </button>
             </div>
 
-            <button type="submit">Create Account</button>
+            <button type="submit" class="submit-btn">Create Account</button>
 
             <div class="divider">Already have an account?</div>
 
             <p class="signup-link"><a href="/login">Sign in instead</a></p>
         </form>
     </div>
+
+    <script>
+        const pw = document.getElementById("password");
+        const toggle = document.getElementById("togglePw");
+        toggle.addEventListener("click", function () {
+            const show = pw.type === "password";
+            pw.type = show ? "text" : "password";
+            this.classList.toggle("on", show);
+            this.setAttribute("aria-label", show ? "Hide password" : "Show password");
+        });
+    </script>
 
 </body>
 </html>

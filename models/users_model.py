@@ -1,5 +1,6 @@
 import sqlite3
 from db import get_user_conn
+import os
 
 def add_login_info(username,password):
     conn = get_user_conn()
@@ -9,6 +10,13 @@ def add_login_info(username,password):
             INSERT OR IGNORE INTO users(username,password)
             VALUES(?,?)
     ''',(username,password))
+
+    # After creating the user account
+    cur.execute("""
+        INSERT INTO profile (username, profile_pic)
+        VALUES (?, ?)
+    """, (username, "default.png"))
+    
     conn.commit()
     conn.close()
 

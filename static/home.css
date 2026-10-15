@@ -212,3 +212,68 @@ a{
         border-radius: 10px;
     }
 }
+
+/* ---------- Fullscreen image preview ---------- */
+.post-image{
+    cursor: zoom-in;
+}
+
+.lightbox{
+    position: fixed;
+    inset: 0;
+    z-index: 2000; /* above navbar and bottom-nav (1000) */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(18, 14, 32, 0.94);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.2s ease, visibility 0.2s ease;
+}
+
+.lightbox.open{
+    opacity: 1;
+    visibility: visible;
+}
+
+.lightbox img{
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    transform: scale(0.96);
+    transition: transform 0.2s ease;
+    user-select: none;
+}
+
+.lightbox.open img{
+    transform: scale(1);
+}
+
+.lightbox-close{
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    z-index: 10;                      /* sit above the image */
+    width: 42px;
+    height: 42px;
+    border: 2px solid rgba(255, 255, 255, 0.9);
+    border-radius: 50%;
+    background: rgba(18, 14, 32, 0.75); /* dark, so it shows on light photos */
+    color: #fff;
+    font-size: 26px;
+    line-height: 1;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+    transition: background 0.15s ease, transform 0.1s ease;
+}
+
+.lightbox-close:hover{
+    background: rgba(192, 69, 106, 0.9);
+}
+
+.lightbox-close:active{
+    transform: scale(0.92);
+}

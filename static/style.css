@@ -1,100 +1,208 @@
+:root{
+  --bg-dark: #1a1033;
+  --bg-mid: #2d1b69;
+  --primary: #6c4fd4;
+  --accent: #b088f9;
+  --ink: #ffffff;
+  --soft: #e6dcff;
+}
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: Arial, sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
 }
 
 body {
-  height: 100vh;
+  min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  background: linear-gradient(135deg, #0f172a, #1e3a8a, #2563eb);
+  background: linear-gradient(135deg, var(--bg-dark), var(--bg-mid), var(--primary));
+  background-size: 200% 200%;
+  animation: gradientShift 14s ease infinite;
   overflow: hidden;
-}
-
-.container {
-  text-align: center;
-  color: white;
-  animation: fadeIn 1.2s ease;
   padding: 20px;
 }
 
+/* ---------- Card ---------- */
+.container {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 440px;
+  text-align: center;
+  color: var(--ink);
+  padding: 44px 32px 40px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 28px;
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  box-shadow: 0 20px 60px rgba(10, 5, 30, 0.45);
+  animation: fadeIn 1s ease;
+}
+
+/* ---------- Logo ---------- */
 .logo {
-  width: 120px;
-  height: 120px;
+  width: 112px;
+  height: 112px;
   border-radius: 50%;
   background: white;
   display: flex;
   justify-content: center;
   align-items: center;
   margin: auto;
-  box-shadow: 0 0 30px rgba(255, 255, 255, 0.3);
-  animation: float 3s ease-in-out infinite;
+  box-shadow: 0 0 0 8px rgba(176, 136, 249, 0.25),
+              0 0 40px rgba(176, 136, 249, 0.55);
+  animation: float 3.5s ease-in-out infinite;
 }
 
 .logo img {
-  width: 70px;
-  height: 70px;
+  width: 66px;
+  height: 66px;
+  object-fit: contain;
 }
 
+/* ---------- Text ---------- */
 h1 {
-  margin-top: 25px;
-  font-size: 42px;
-  font-weight: bold;
+  margin-top: 28px;
+  font-size: 34px;
+  font-weight: 800;
+  line-height: 1.2;
+  letter-spacing: -0.5px;
+}
+
+.gradient-text {
+  background: linear-gradient(90deg, #d9c6ff, var(--accent), #ffffff);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
 }
 
 p {
   margin-top: 12px;
-  font-size: 18px;
-  color: #dbeafe;
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--soft);
 }
 
-.btns {
-  margin-top: 35px;
+/* ---------- Feature chips ---------- */
+.features {
+  margin-top: 28px;
   display: flex;
-  gap: 15px;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.feature {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.feature-icon {
+  font-size: 15px;
+}
+
+/* ---------- Buttons ---------- */
+.btns {
+  margin-top: 34px;
+  display: flex;
+  gap: 14px;
   justify-content: center;
   flex-wrap: wrap;
 }
 
 .btn {
+  flex: 1;
+  min-width: 140px;
   padding: 14px 28px;
   border: none;
   border-radius: 30px;
   font-size: 16px;
   cursor: pointer;
-  transition: 0.3s;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
   text-decoration: none;
-  font-weight: bold;
+  font-weight: 700;
+  text-align: center;
 }
 
 .login {
   background: white;
-  color: #2563eb;
+  color: var(--primary);
+  box-shadow: 0 6px 20px rgba(255, 255, 255, 0.2);
 }
 
 .login:hover {
-  transform: scale(1.05);
-  background: #e2e8f0;
+  transform: translateY(-2px) scale(1.03);
+  background: #f3edff;
+  box-shadow: 0 10px 28px rgba(255, 255, 255, 0.3);
 }
 
 .signup {
-  background: #2563eb;
+  background: linear-gradient(90deg, var(--primary), var(--accent));
   color: white;
-  border: 2px solid white;
+  border: 2px solid rgba(255, 255, 255, 0.85);
+  box-shadow: 0 6px 20px rgba(108, 79, 212, 0.45);
 }
 
 .signup:hover {
-  transform: scale(1.05);
-  background: #1d4ed8;
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 10px 28px rgba(108, 79, 212, 0.6);
 }
 
+.btn:active {
+  transform: scale(0.97);
+}
+
+/* ---------- Background circles ---------- */
+.circle {
+  position: absolute;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, rgba(176, 136, 249, 0.35), rgba(176, 136, 249, 0.05));
+  filter: blur(2px);
+  animation: move 10s ease-in-out infinite;
+  z-index: 1;
+}
+
+.circle:nth-child(1) {
+  width: 260px;
+  height: 260px;
+  top: -70px;
+  left: -70px;
+}
+
+.circle:nth-child(2) {
+  width: 200px;
+  height: 200px;
+  bottom: -60px;
+  right: -40px;
+  animation-delay: -3s;
+}
+
+.circle:nth-child(3) {
+  width: 120px;
+  height: 120px;
+  top: 55%;
+  left: 8%;
+  animation-delay: -6s;
+}
+
+/* ---------- Animations ---------- */
 @keyframes fadeIn {
   from {
     opacity: 0;
-    transform: translateY(20px);
+    transform: translateY(24px);
   }
   to {
     opacity: 1;
@@ -103,46 +211,39 @@ p {
 }
 
 @keyframes float {
-  0% {
-    transform: translateY(0px);
-  }
-  50% {
-    transform: translateY(-10px);
-  }
-  100% {
-    transform: translateY(0px);
-  }
-}
-
-.circle {
-  position: absolute;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.08);
-  animation: move 10s linear infinite;
-}
-
-.circle:nth-child(1) {
-  width: 200px;
-  height: 200px;
-  top: -50px;
-  left: -50px;
-}
-
-.circle:nth-child(2) {
-  width: 150px;
-  height: 150px;
-  bottom: -40px;
-  right: -30px;
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
 }
 
 @keyframes move {
-  0% {
-    transform: translateY(0px);
+  0%, 100% { transform: translate(0, 0); }
+  50% { transform: translate(18px, 24px); }
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 480px) {
+  .container {
+    padding: 36px 22px 32px;
+    border-radius: 22px;
   }
-  50% {
-    transform: translateY(20px);
+
+  h1 {
+    font-size: 28px;
   }
-  100% {
-    transform: translateY(0px);
+
+  .btn {
+    min-width: 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation: none !important;
   }
 }
